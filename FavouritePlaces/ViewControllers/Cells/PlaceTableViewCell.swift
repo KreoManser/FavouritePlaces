@@ -53,7 +53,7 @@ class PlaceTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(name: String, location: String, type: String) {
+    func set(name: String, location: String, type: String, image: String) {
         nameLabel.text = name
         locationLabel.text = location
         typeLabel.text = type

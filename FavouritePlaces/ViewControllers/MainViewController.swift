@@ -9,9 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     private let identifier = "Places"
-    private let placesNames = [
-        "Aba", "VB", "WB", "Kara", "Talka", "Loooose", "Ball"
-    ]
+    private let places = Place.getPlaces()
+
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,14 +28,19 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        placesNames.count
+        places.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let cell = tableView.dequeueReusableCell(withIdentifier: PlaceTableViewCell.identifier, for: indexPath) as? PlaceTableViewCell
         else { return UITableViewCell() }
-        cell.set(name: "AA", location: "Baumana", type: "Bar")
+        cell.set(
+            name: places[indexPath.row].name,
+            location: places[indexPath.row].location,
+            type: places[indexPath.row].type,
+            image: places[indexPath.row].image
+        )
         cell.imageOfPlace.layer.cornerRadius = cell.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
         return cell
