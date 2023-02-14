@@ -22,7 +22,17 @@ class MainViewController: UIViewController {
         setupUI()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(PlaceTableViewCell.self, forCellReuseIdentifier: PlaceTableViewCell.identifier)
+        tableView.register(
+            PlaceTableViewCell.self,
+            forCellReuseIdentifier: PlaceTableViewCell.identifier
+        )
+    }
+
+    @objc
+    private func addNewPlace() {
+        let placeVC = NewPlaceViewController()
+        placeVC.modalPresentationStyle = .fullScreen
+        present(UINavigationController(rootViewController: placeVC), animated: true)
     }
 }
 
@@ -45,8 +55,6 @@ extension MainViewController: UITableViewDataSource {
         cell.imageOfPlace.clipsToBounds = true
         return cell
     }
-
-
 }
 
 extension MainViewController: UITableViewDelegate {
@@ -59,8 +67,6 @@ extension MainViewController {
     private func setupUI() {
         setupNavigationBar()
         setSubviews(tableView)
-        // MARK: DO THIS
-        tableView.backgroundColor = .orange
         setConstraints()
     }
 
@@ -73,6 +79,11 @@ extension MainViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             .font: UIFont(name: "Snell Roundhand Bold", size: 24)!
         ]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addNewPlace)
+         )
     }
 
     private func setConstraints() {
@@ -83,5 +94,4 @@ extension MainViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-
 }
