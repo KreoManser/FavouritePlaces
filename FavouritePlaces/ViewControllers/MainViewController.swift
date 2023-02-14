@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
     }
 }
@@ -33,8 +34,9 @@ extension MainViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        var configuration = UIListContentConfiguration.cell()
+        var configuration = UIListContentConfiguration.valueCell()
         configuration.text = placesNames[indexPath.row]
+        configuration.imageProperties.cornerRadius = cell.frame.size.height / 2
         configuration.image = UIImage(systemName: "person")
         cell.contentConfiguration = configuration
         return cell
@@ -44,7 +46,9 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        85
+    }
 }
 
 extension MainViewController {
@@ -61,9 +65,10 @@ extension MainViewController {
     }
 
     private func setupNavigationBar() {
-        // MARK: DO THIS
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Main"
+        navigationItem.title = "My Places"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont(name: "Snell Roundhand Bold", size: 24)!
+        ]
     }
 
     private func setConstraints() {
