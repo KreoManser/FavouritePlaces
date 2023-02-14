@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AF2540B299BC59700A34BAA /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF2540A299BC59700A34BAA /* PlaceTableViewCell.swift */; };
 		0AFA817E29969727005EDA6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFA817D29969727005EDA6D /* AppDelegate.swift */; };
 		0AFA818029969727005EDA6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFA817F29969727005EDA6D /* SceneDelegate.swift */; };
 		0AFA818229969727005EDA6D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFA818129969727005EDA6D /* MainViewController.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AF2540A299BC59700A34BAA /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
 		0AFA817A29969727005EDA6D /* FavouritePlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavouritePlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AFA817D29969727005EDA6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AFA817F29969727005EDA6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AF25409299BC57500A34BAA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0AF2540A299BC59700A34BAA /* PlaceTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0AFA817129969727005EDA6D = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +85,7 @@
 		0AFA81922996973B005EDA6D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0AF25409299BC57500A34BAA /* Cells */,
 				0AFA818129969727005EDA6D /* MainViewController.swift */,
 			);
 			path = ViewControllers;
@@ -169,6 +180,7 @@
 				0AFA818229969727005EDA6D /* MainViewController.swift in Sources */,
 				0AFA817E29969727005EDA6D /* AppDelegate.swift in Sources */,
 				0AFA818029969727005EDA6D /* SceneDelegate.swift in Sources */,
+				0AF2540B299BC59700A34BAA /* PlaceTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

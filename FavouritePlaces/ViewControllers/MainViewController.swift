@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
         setupUI()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
+        tableView.register(PlaceTableViewCell.self, forCellReuseIdentifier: PlaceTableViewCell.identifier)
     }
 }
 
@@ -33,12 +33,12 @@ extension MainViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        var configuration = UIListContentConfiguration.valueCell()
-        configuration.text = placesNames[indexPath.row]
-        configuration.imageProperties.cornerRadius = cell.frame.size.height / 2
-        configuration.image = UIImage(systemName: "person")
-        cell.contentConfiguration = configuration
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: PlaceTableViewCell.identifier, for: indexPath) as? PlaceTableViewCell
+        else { return UITableViewCell() }
+        cell.set(name: "AA", location: "Baumana", type: "Bar")
+        cell.imageOfPlace.layer.cornerRadius = cell.frame.size.height / 2
+        cell.imageOfPlace.clipsToBounds = true
         return cell
     }
 
