@@ -10,12 +10,22 @@ import UIKit
 class PlaceTableViewCell: UITableViewCell {
     static let identifier = "CustomPlaceCell"
 
+    private lazy var infoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 3
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
     var imageOfPlace: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "person")
-//        imageView.layer.cornerRadius = imageView.frame.size.height / 2
-//        imageView.clipsToBounds = true
+        //        imageView.layer.cornerRadius = imageView.frame.size.height / 2
+        //        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -45,7 +55,6 @@ class PlaceTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setSubviews(imageOfPlace, nameLabel, locationLabel, typeLabel)
         setupUI()
     }
 
@@ -61,11 +70,21 @@ class PlaceTableViewCell: UITableViewCell {
 }
 
 extension PlaceTableViewCell {
+    private func setSubviews(forStack stackview: UIStackView, _ subviews: UIView...) {
+        subviews.forEach { stackview.addArrangedSubview($0) }
+    }
+
     private func setSubviews(_ subviews: UIView...) {
         subviews.forEach { contentView.addSubview($0) }
     }
 
     private func setupUI() {
+        setSubviews(imageOfPlace, infoStackView)
+        setSubviews(forStack: infoStackView, nameLabel, locationLabel, typeLabel)
+        setConstraints()
+    }
+
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             imageOfPlace.topAnchor
                 .constraint(equalTo: contentView.topAnchor, constant: 10),
@@ -78,27 +97,36 @@ extension PlaceTableViewCell {
             imageOfPlace.widthAnchor
                 .constraint(equalToConstant: 65),
 
-            nameLabel.topAnchor
-                .constraint(equalTo: contentView.topAnchor, constant: 9),
-            nameLabel.leadingAnchor
-                .constraint(equalTo: imageOfPlace.trailingAnchor, constant: 15),
-            nameLabel.trailingAnchor
+            infoStackView.topAnchor
+                .constraint(equalTo: contentView.topAnchor, constant: 8),
+            infoStackView.leadingAnchor
+                .constraint(equalTo: imageOfPlace.trailingAnchor, constant: 16),
+            infoStackView.trailingAnchor
                 .constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            infoStackView.bottomAnchor
+                .constraint(equalTo: contentView.bottomAnchor, constant: -8),
 
-            typeLabel.leadingAnchor
-                .constraint(equalTo: imageOfPlace.trailingAnchor, constant: 15),
-            typeLabel.trailingAnchor
-                .constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            typeLabel.bottomAnchor
-                .constraint(equalTo: contentView.bottomAnchor, constant: -9.5),
-
-            locationLabel.topAnchor
-                .constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
-            locationLabel.leadingAnchor
-                .constraint(equalTo: imageOfPlace.trailingAnchor, constant: 15),
-            locationLabel.trailingAnchor
-                .constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            locationLabel.bottomAnchor.constraint(equalTo: typeLabel.topAnchor, constant: 1),
+//            nameLabel.topAnchor
+//                .constraint(equalTo: contentView.topAnchor, constant: 9),
+//            nameLabel.leadingAnchor
+//                .constraint(equalTo: imageOfPlace.trailingAnchor, constant: 15),
+//            nameLabel.trailingAnchor
+//                .constraint(equalTo: contentView.trailingAnchor, constant: -16),
+//
+//            typeLabel.leadingAnchor
+//                .constraint(equalTo: imageOfPlace.trailingAnchor, constant: 15),
+//            typeLabel.trailingAnchor
+//                .constraint(equalTo: contentView.trailingAnchor, constant: -16),
+//            typeLabel.bottomAnchor
+//                .constraint(equalTo: contentView.bottomAnchor, constant: -9.5),
+//
+//            locationLabel.topAnchor
+//                .constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+//            locationLabel.leadingAnchor
+//                .constraint(equalTo: imageOfPlace.trailingAnchor, constant: 15),
+//            locationLabel.trailingAnchor
+//                .constraint(equalTo: contentView.trailingAnchor, constant: -16),
+//            locationLabel.bottomAnchor.constraint(equalTo: typeLabel.topAnchor, constant: 1),
         ])
     }
 }

@@ -30,9 +30,10 @@ class MainViewController: UIViewController {
 
     @objc
     private func addNewPlace() {
-        let placeVC = NewPlaceViewController()
+        let placeVC = UINavigationController(rootViewController: NewPlaceViewController())
         placeVC.modalPresentationStyle = .fullScreen
-        present(UINavigationController(rootViewController: placeVC), animated: true)
+        placeVC.modalTransitionStyle = .crossDissolve
+        present(placeVC, animated: true)
     }
 }
 
