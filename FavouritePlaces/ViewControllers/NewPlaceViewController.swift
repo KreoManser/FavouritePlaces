@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 class NewPlaceViewController: UIViewController {
     private lazy var tableView: UITableView = {
@@ -86,13 +87,62 @@ extension NewPlaceViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-
+            let actionSheet = UIAlertController(
+                title: nil,
+                message: nil,
+                preferredStyle: .actionSheet
+            )
+            let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+                self.chooseCamera()
+            }
+            let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+                self.chooseImagePicker()
+            }
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            actionSheet.addAction(camera)
+            actionSheet.addAction(photo)
+            actionSheet.addAction(cancel)
+            present(actionSheet, animated: true)
         } else {
             view.endEditing(true)
         }
     }
+}
 
+extension NewPlaceViewController: PHPickerViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func chooseCamera() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .camera
+        imagePicker.delegate = self
+        imagePicker.cameraCaptureMode = .photo
+        present(imagePicker, animated: true)
+    }
 
+    private func chooseImagePicker() {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+        config.selectionLimit = 1
+        config.preferredAssetRepresentationMode = .current
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        for result in results {
+            result.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { (object, error) in
+                if let image = object as? UIImage {
+                    DispatchQueue.main.async {
+                        // Use UIImage
+                        print("Selected image: \(image)")
+                    }
+                }
+            })
+        }
+    }
 }
 
 extension NewPlaceViewController {
