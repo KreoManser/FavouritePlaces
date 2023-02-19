@@ -54,7 +54,6 @@ extension NewPlaceViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: NewPlaceInfoCell.identifier, for: indexPath) as? NewPlaceInfoCell
                 else { return UITableViewCell() }
                 cell.set(labelName: "Name", textFieldName: "Place name")
-                
                 return cell
             case 2:
                 guard
@@ -184,6 +183,7 @@ extension NewPlaceViewController {
             target: self,
             action: #selector(save)
         )
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     private func setConstraints() {

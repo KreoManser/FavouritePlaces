@@ -50,7 +50,7 @@ extension MainViewController: UITableViewDataSource {
             name: places[indexPath.row].name,
             location: places[indexPath.row].location,
             type: places[indexPath.row].type,
-            image: places[indexPath.row].image
+            image: places[indexPath.row].placeImage!
         )
         cell.imageOfPlace.layer.cornerRadius = cell.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
