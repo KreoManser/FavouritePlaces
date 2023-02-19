@@ -67,6 +67,10 @@ class PlaceTableViewCell: UITableViewCell {
         locationLabel.text = location
         typeLabel.text = type
     }
+
+    func set(image: UIImage) {
+        imageOfPlace.image = image
+    }
 }
 
 extension PlaceTableViewCell {

@@ -87,6 +87,9 @@ extension NewPlaceViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+            let cameraIcon = #imageLiteral(resourceName: "camera")
+            let photoIcon = #imageLiteral(resourceName: "photo")
+
             let actionSheet = UIAlertController(
                 title: nil,
                 message: nil,
@@ -95,9 +98,15 @@ extension NewPlaceViewController: UITableViewDelegate {
             let camera = UIAlertAction(title: "Camera", style: .default) { _ in
                 self.chooseCamera()
             }
+            camera.setValue(cameraIcon, forKey: "image")
+            camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
             let photo = UIAlertAction(title: "Photo", style: .default) { _ in
                 self.chooseImagePicker()
             }
+            photo.setValue(photoIcon, forKey: "image")
+            photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
             actionSheet.addAction(camera)
             actionSheet.addAction(photo)
@@ -136,8 +145,13 @@ extension NewPlaceViewController: PHPickerViewControllerDelegate, UIImagePickerC
             result.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { (object, error) in
                 if let image = object as? UIImage {
                     DispatchQueue.main.async {
-                        // Use UIImage
-                        print("Selected image: \(image)")
+                        guard
+                            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+                                as? NewPlacePhotoCell
+                        else { return }
+                        cell.imageOfPlace.image = image
+                        cell.imageOfPlace.contentMode = .scaleAspectFill
+                        cell.imageOfPlace.clipsToBounds = true
                     }
                 }
             })
