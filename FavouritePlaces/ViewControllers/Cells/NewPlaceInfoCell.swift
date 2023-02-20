@@ -9,6 +9,7 @@ import UIKit
 
 class NewPlaceInfoCell: UITableViewCell {
     static let identifier = "NewPlaceInfoCell"
+    private var barButtonDelegate: UIBarButtonItem!
 
     private lazy var describingStackView: UIStackView = {
         let stackView = UIStackView()
@@ -41,15 +42,26 @@ class NewPlaceInfoCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         describeTextField.delegate = self
+        describeTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(labelName: String, textFieldName: String) {
+    func set(labelName: String, textFieldName: String, delegate: UIBarButtonItem?) {
         describeLabel.text = labelName
         describeTextField.placeholder = textFieldName
+        barButtonDelegate = delegate
+    }
+
+    @objc
+    func textFieldChanged() {
+        if describeTextField.text?.isEmpty == false {
+            barButtonDelegate?.isEnabled = true
+        } else {
+            barButtonDelegate?.isEnabled = false
+        }
     }
 }
 

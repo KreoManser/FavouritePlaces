@@ -53,19 +53,19 @@ extension NewPlaceViewController: UITableViewDataSource {
                 guard
                 let cell = tableView.dequeueReusableCell(withIdentifier: NewPlaceInfoCell.identifier, for: indexPath) as? NewPlaceInfoCell
                 else { fatalError("Doesn't create cell") }
-                cell.set(labelName: "Name", textFieldName: "Place name")
+                cell.set(labelName: "Name", textFieldName: "Place name", delegate: navigationItem.rightBarButtonItem)
                 return cell
             case 2:
                 guard
                     let cell = tableView.dequeueReusableCell(withIdentifier: NewPlaceInfoCell.identifier, for: indexPath) as? NewPlaceInfoCell
                 else { fatalError("Doesn't create cell") }
-                cell.set(labelName: "Location", textFieldName: "Location name")
+                cell.set(labelName: "Location", textFieldName: "Location name", delegate: nil)
                 return cell
             case 3:
                 guard
                     let cell = tableView.dequeueReusableCell(withIdentifier: NewPlaceInfoCell.identifier, for: indexPath) as? NewPlaceInfoCell
                 else { fatalError("Doesn't create cell") }
-                cell.set(labelName: "Type", textFieldName: "Type name")
+                cell.set(labelName: "Type", textFieldName: "Type name", delegate: nil)
                 return cell
             default:
                 fatalError("Doesn't create cell")
