@@ -68,7 +68,7 @@ extension NewPlaceViewController: UITableViewDataSource {
                 cell.set(labelName: "Type", textFieldName: "Type name")
                 return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "def", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Unknown", for: indexPath)
                 return cell
         }
     }
